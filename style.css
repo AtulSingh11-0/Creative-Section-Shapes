@@ -1,0 +1,142 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --body-bg: hsl(0, 0%, 25%);
+    --spike-width: 50px;
+    --spike-height: 10px;
+}
+
+html {
+    color-scheme: dark light;
+}
+
+body {
+    background: var(--body-bg);
+    color: white;
+    margin: 0;
+    font-family: system-ui;
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+.wrapper {
+    max-width: 50rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+.site-title {
+    font-size: 3rem;
+    text-align: center;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.25rem;
+}
+
+section {
+    padding-block: 5rem;
+}
+
+.diagonal {
+    position: relative;
+    color: #736380;
+    isolation: isolate;
+    --skew-angle: -5deg;
+    --background: linear-gradient(
+        30deg,
+        rgb(253, 239, 132) 0%, 
+        rgb(247, 198, 169) 54.2%, 
+        rgb(21, 186, 196) 100.3%
+    );
+}
+
+.diagonal::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--background); 
+    transform: skewY(var(--skew-angle));
+}
+
+p {
+    text-align: justify;
+}
+
+.spike {
+    --spike-color: var(--body-bg);
+    position: relative;
+    color: black;
+    background: linear-gradient(
+        110.3deg, 
+        rgb(216, 164, 114) 8.7%, 
+        rgb(196, 83, 58) 47.5%, 
+        rgb(149, 35, 52) 89.1%
+    );
+}
+
+.spike::before,
+.spike::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: var(--spike-height);
+    background: var(--spike-color);
+    
+    /* for chrome*/
+    -webkit-mask-size:
+        var(--spike-width)
+        var(--spike-height)
+    ;
+    /* for fireforx and safari*/
+    mask-size:
+        var(--spike-width)
+        var(--spike-height)
+    ;
+}
+
+.spike::after {
+    top: 0;
+
+    /* for chrome*/
+    -webkit-mask-image: url('spike.svg');
+    
+    /* for fireforx and safari*/
+    mask-image: url('spike.svg');
+}
+
+.spike::before {
+    bottom: 0;
+    
+    /* for chrome*/
+    -webkit-mask-image: url('spike_upsideDown.svg');
+    
+    /* for fireforx and safari*/
+    mask-image: url('spike_upsideDown.svg');
+}
+
+.wavy {
+    position: relative;
+    color: #47780e;
+    background: linear-gradient(
+        180deg,
+        rgb(255, 230, 109) 11.2%, 
+        rgb(87, 232, 107) 100.2%
+    );
+    --mask:
+    radial-gradient(30.23px at 50% 41.25px,#000 99%,#0000 101%) calc(50% - 30px) 0/60px 51% repeat-x,
+    radial-gradient(30.23px at 50% -26.25px,#0000 99%,#000 101%) 50% 15px/60px calc(51% - 15px) repeat-x,
+    radial-gradient(30.23px at 50% calc(100% - 41.25px),#000 99%,#0000 101%) calc(50% - 30px) 100%/60px 51% repeat-x,
+    radial-gradient(30.23px at 50% calc(100% + 26.25px),#0000 99%,#000 101%) 50% calc(100% - 15px)/60px calc(51% - 15px) repeat-x;
+
+    /* for chrome*/
+    -webkit-mask: var(--mask);
+    /* for fireforx and safari*/
+    mask: var(--mask);
+}
